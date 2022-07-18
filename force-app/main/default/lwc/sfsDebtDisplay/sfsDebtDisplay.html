@@ -1,0 +1,109 @@
+<template>
+  <div class="backgroudDrop">
+    <hr />
+    <lightning-card title="DEBT DATA FOR STRATEGIC FINANCIAL SOLUTIONS">
+      <template if:true={showTable}>
+        <div>
+          <lightning-datatable
+            key-field="id"
+            data={data}
+            columns={columns}
+            onrowselection={selectRow}
+            class="slds-table_col-bordered"
+          >
+          </lightning-datatable>
+        </div>
+      </template>
+      <br />
+      <lightning-button
+        variant="brand"
+        label="Add Debt"
+        onclick={handleAdd}
+        class="slds-p-around_x-small"
+      ></lightning-button>
+      <lightning-button
+        variant="neutral"
+        label="Remove Debt"
+        onclick={handleRemove}
+        class="slds-p-around_x-small"
+      ></lightning-button>
+      <div>
+        <br />
+        <table class="backgroundToTotal">
+          <tr>
+            <td class="paddingToTotalLeft"><b>Total</b></td>
+            <td class="paddingTototal"><b>${additionOfChecked}</b></td>
+          </tr>
+        </table>
+        <br />
+        <b class="slds-p-around_x-small">Total Row Count: {totalRows}</b>
+        <b class="slds-p-around_x-small">Check Row Count: {checkedRows}</b>
+      </div>
+      <!-- Add Row PopUp - start-->
+      <template if:true={showAddRowBox}>
+        <section
+          role="dialog"
+          tabindex="-1"
+          aria-labelledby="modal-heading-01"
+          aria-modal="true"
+          aria-describedby="modal-content-id-1"
+          class="slds-modal slds-fade-in-open"
+        >
+          <div class="slds-modal__container">
+            <header class="slds-modal__header">
+              <h2
+                id="modal-heading-01"
+                class="slds-modal__title slds-hyphenate"
+              >
+                Add Debt
+              </h2>
+            </header>
+            <div
+              class="slds-modal__content slds-p-around_medium"
+              id="modal-content-id-1"
+            >
+              <lightning-input
+                name="Creditor"
+                label="Creditor"
+                onchange={storeValue}
+              ></lightning-input>
+              <lightning-input
+                name="First Name"
+                label="First Name"
+                onchange={storeValue}
+              ></lightning-input>
+              <lightning-input
+                name="Last Name"
+                label="Last Name"
+                onchange={storeValue}
+              ></lightning-input>
+              <lightning-input
+                name="Min Pay"
+                label="Min Pay%"
+                onchange={storeValue}
+              ></lightning-input>
+              <lightning-input
+                name="Balance"
+                label="Balance"
+                onchange={storeValue}
+              ></lightning-input>
+            </div>
+            <footer class="slds-modal__footer">
+              <button class="slds-button slds-button_brand" onclick={addRow}>
+                Add
+              </button>
+              <button
+                class="slds-button slds-button_neutral"
+                onclick={closeModal}
+              >
+                Cancel
+              </button>
+            </footer>
+          </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+      </template>
+      <!-- Add Row PopUp - end-->
+    </lightning-card>
+  </div>
+</template>
